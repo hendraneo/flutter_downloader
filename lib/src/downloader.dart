@@ -65,6 +65,7 @@ class FlutterDownloader {
   static Future<String> enqueue(
       {@required String url,
       @required String savedDir,
+      String title,
       String fileName,
       Map<String, String> headers,
       bool showNotification = true,
@@ -85,6 +86,7 @@ class FlutterDownloader {
     try {
       String taskId = await _channel.invokeMethod('enqueue', {
         'url': url,
+        'title': title,
         'saved_dir': savedDir,
         'file_name': fileName,
         'headers': headerBuilder.toString(),
@@ -117,6 +119,7 @@ class FlutterDownloader {
               status: DownloadTaskStatus(item['status']),
               progress: item['progress'],
               url: item['url'],
+              title: item['title'],
               filename: item['file_name'],
               savedDir: item['saved_dir'],
               timeCreated: item['time_created']))
@@ -160,6 +163,7 @@ class FlutterDownloader {
               status: DownloadTaskStatus(item['status']),
               progress: item['progress'],
               url: item['url'],
+              title: item['title'],
               filename: item['file_name'],
               savedDir: item['saved_dir'],
               timeCreated: item['time_created']))
